@@ -1841,10 +1841,10 @@ respectively."
 		  (if (boundp 'yas/active-field-overlay)
 		      ;; yasnippet version >= 0.6
 		      (when (memq yas/active-field-overlay (overlays-at pos))
-			(dont-compile ; To avoid byte-compile error
+
 			  (setf (yas/field-modified-p
 				 (overlay-get yas/active-field-overlay 'yas/field))
-				nil)))
+				nil))
 		    ;; yasnippet version < 0.6
 		    (mapc (lambda (overlay)
 			    (when (overlay-get overlay 'yas/modified?)
@@ -2309,12 +2309,11 @@ respectively."
   (with-no-warnings
     (table--finish-delayed-tasks)
     (table-recognize-cell 'force)
-    (dont-compile ; To avoid byte-compile error
       (table-with-cache-buffer
        (insert-and-inherit string)
        (table--untabify (point-min) (point-max))
        (table--fill-region (point-min) (point-max))
-       (setq table-inhibit-auto-fill-paragraph t)))
+       (setq table-inhibit-auto-fill-paragraph t))
     (table--finish-delayed-tasks)))
 
 (defun ibus-commit-text-cb (id text)
